@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+
 var app = express();
 
 // Configure view
@@ -22,7 +23,18 @@ app.get('/', function(req, res){
 });
 
 app.get('/users', function(req, res){
-	res.send('hello user');
+	var data = [
+		{
+			name : 'nasrul 1'
+		},
+		{
+			name : 'nasrul 2'
+		},
+		{
+			name : 'nasrul 3'
+		}
+	];
+	res.render('users/index',{users : data});
 });
 
 // use ? after parameter to add as optional parameter
