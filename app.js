@@ -1,7 +1,12 @@
 var express = require('express');
-var http = require('http');
+var path = require('path');
 var app = express();
 
+// Configure view
+app.set('views',path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+
+// Configure header
 app.use(function(req, res, next){
 	// remove x-powered-by
 	res.removeHeader('X-Powered-By');
@@ -11,6 +16,7 @@ app.use(function(req, res, next){
 	next();
 });
 
+// Route
 app.get('/', function(req, res){
 	res.send('hello');
 });
@@ -28,6 +34,10 @@ app.get('/users/details/:id?/', function(req, res){
 
 	// res.send('user id: ' + id);
 	res.send(req.params);
+});
+
+app.get('/users/:id/show', function(req, res){
+	res.render('users/show', {foo:'some foo'});
 });
 
 app.listen(3000, function(){
